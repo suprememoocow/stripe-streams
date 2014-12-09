@@ -3,7 +3,7 @@
 A library for streaming Stripe API calls
 
 ```
-npm install stripe-stream
+npm install stripe-streams
 ```
 
 ## Reasoning
@@ -15,7 +15,7 @@ This library allows you to stream results from the Stripe API without having to 
 For example, to stream a list of customers, you can call:
 
 ```javascript
-var CustomerStream = require('stripe-stream').CustomerStream;
+var CustomerStream = require('stripe-streams').CustomerStream;
 var stripe = require('stripe')(process.env.STRIPE_KEY);
 
 new CustomerStream(stripe)
@@ -31,7 +31,7 @@ This will fetch all customers from Stripe and return each customer object as an 
 It is also possible to pass query parameters to Stripe:
 
 ```javascript
-var CustomerStream = require('stripe-stream').CustomerStream;
+var CustomerStream = require('stripe-streams').CustomerStream;
 var stripe = require('stripe')(process.env.STRIPE_KEY);
 
 // Fetch all new customers in the last day...
@@ -46,7 +46,7 @@ new CustomerStream(stripe, { created: { gt: Math.floor(Date.now() / 1000) - 8640
 Stripe streams are fully compliant node streams, so you can transform them, pipe them to other streams, etc
 
 ```javascript
-var BalanceHistoryStream = require('stripe-stream').BalanceHistoryStream;
+var BalanceHistoryStream = require('stripe-streams').BalanceHistoryStream;
 var stripe = require('stripe')(process.env.STRIPE_KEY);
 var csv = require('fast-csv');
 
