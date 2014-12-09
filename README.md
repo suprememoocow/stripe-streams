@@ -1,21 +1,23 @@
 # stripe-streams
 
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/suprememoocow/stripe-streams?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A library for streaming Stripe API calls
 
 ```
-npm install stripe-stream
+npm install stripe-streams
 ```
 
 ## Reasoning
 
-Stripe's API pagenates the results. You can fetch a maximum of 100 items in a single query, after which you need to requery with the `starting_after` parameter set to the last item from the previous query. 
+Stripe's API paginates the results. You can fetch a maximum of 100 items in a single query, after which you need to requery with the `starting_after` parameter set to the last item from the previous query. 
 
 This library allows you to stream results from the Stripe API without having to worry about pagenation. It will be taken care of for you.
 
 For example, to stream a list of customers, you can call:
 
 ```javascript
-var CustomerStream = require('stripe-stream').CustomerStream;
+var CustomerStream = require('stripe-streams').CustomerStream;
 var stripe = require('stripe')(process.env.STRIPE_KEY);
 
 new CustomerStream(stripe)
@@ -31,7 +33,7 @@ This will fetch all customers from Stripe and return each customer object as an 
 It is also possible to pass query parameters to Stripe:
 
 ```javascript
-var CustomerStream = require('stripe-stream').CustomerStream;
+var CustomerStream = require('stripe-streams').CustomerStream;
 var stripe = require('stripe')(process.env.STRIPE_KEY);
 
 // Fetch all new customers in the last day...
@@ -46,12 +48,12 @@ new CustomerStream(stripe, { created: { gt: Math.floor(Date.now() / 1000) - 8640
 Stripe streams are fully compliant node streams, so you can transform them, pipe them to other streams, etc
 
 ```javascript
-var TransactionStream = require('stripe-stream').TransactionStream;
+var BalanceHistoryStream = require('stripe-streams').BalanceHistoryStream;
 var stripe = require('stripe')(process.env.STRIPE_KEY);
 var csv = require('fast-csv');
 
-new TransactionStream()
-  .pipe(new TransactionTransformer())
+new BalanceHistoryStream()
+  .pipe(new CustomerTransactionTransformer())
   .pipe(csv.createWriteStream({ headers: true }))
   .pipe(fs.createWriteStream('./transactions'))
   
