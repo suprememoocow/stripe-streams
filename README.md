@@ -8,7 +8,7 @@ npm install stripe-streams
 
 ## Reasoning
 
-Stripe's API pagenates the results. You can fetch a maximum of 100 items in a single query, after which you need to requery with the `starting_after` parameter set to the last item from the previous query. 
+Stripe's API paginates the results. You can fetch a maximum of 100 items in a single query, after which you need to requery with the `starting_after` parameter set to the last item from the previous query. 
 
 This library allows you to stream results from the Stripe API without having to worry about pagenation. It will be taken care of for you.
 
