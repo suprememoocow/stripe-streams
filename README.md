@@ -46,12 +46,12 @@ new CustomerStream(stripe, { created: { gt: Math.floor(Date.now() / 1000) - 8640
 Stripe streams are fully compliant node streams, so you can transform them, pipe them to other streams, etc
 
 ```javascript
-var TransactionStream = require('stripe-stream').TransactionStream;
+var BalanceHistoryStream = require('stripe-stream').BalanceHistoryStream;
 var stripe = require('stripe')(process.env.STRIPE_KEY);
 var csv = require('fast-csv');
 
-new TransactionStream()
-  .pipe(new TransactionTransformer())
+new BalanceHistoryStream()
+  .pipe(new CustomerTransactionTransformer())
   .pipe(csv.createWriteStream({ headers: true }))
   .pipe(fs.createWriteStream('./transactions'))
   
