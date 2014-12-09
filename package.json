@@ -20,7 +20,9 @@
     "url": "https://github.com/suprememoocow/stripe-streams/issues"
   },
   "homepage": "https://github.com/suprememoocow/stripe-streams",
-  "dependencies": {},
+  "dependencies": {
+    "util-extend": "^1.0.1"
+  },
   "devDependencies": {
     "mocha": "^2.0.1",
     "stripe": "^3.0.2"
